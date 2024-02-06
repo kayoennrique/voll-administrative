@@ -25,7 +25,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "commit": "cz"
+    "commit": "cz",
+    "api": "json-server --watch -p 8080 db.json"
   },
   "eslintConfig": {
     "extends": [
