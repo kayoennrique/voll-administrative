@@ -30,7 +30,7 @@ function Header() {
         <LinkStylized href="#">Sair</LinkStylized>
       </Container>
     </StylizedHeader>
-  )
+  );
 }
 
 export default Header;
