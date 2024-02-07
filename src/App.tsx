@@ -7,6 +7,7 @@ import Tablle from './components/Table';
 import useQueryData from './useQueryData';
 import Graphic from './components/Graphic';
 import useDataProfessional from './useDataProfessional';
+import Assessment from './components/Assessment';
 
 function App() {
   const { dados: consultas, erro: queriesErro } = useQueryData();
@@ -24,6 +25,7 @@ function App() {
         <Title>Area Administrativa</Title>
         <Tablle consultas={consultas} />
         <Graphic consultas={consultas} profissionais={profissionais} />
+        <Assessment profissionais={profissionais} />
       </Container>
       <Footer />
     </>
