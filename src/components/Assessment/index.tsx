@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import IProfessional from "../../types/IProfessional";
 import Card from "./Card";
+import Button from "../Button";
 
 const CardSection = styled.section`
     display: flex;
@@ -11,12 +12,15 @@ const CardSection = styled.section`
 
 function Assessment({ profissionais }: { profissionais: IProfessional[] | null }) {
   return (
-    <CardSection>
-      {profissionais?.map((profissional) => {
-        return <Card profissional={profissional} />
-      })}
-    </CardSection>
-  )
+    <>
+      <CardSection>
+        {profissionais?.map((profissional) => {
+          return <Card profissional={profissional} />
+        })}
+      </CardSection>
+      <Button>Ver mais</Button>
+    </>
+  );
 }
 
 export default Assessment;
