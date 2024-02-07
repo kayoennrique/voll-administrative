@@ -5,8 +5,9 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TableBody from "@mui/material/TableBody";
+import IQuery from "../../types/IQuery";
 
-function Tablle() {
+function Tablle({ consultas }: { consultas: IQuery[] | null }) {
   return (
     <>
       <TableContainer component={Paper}>
@@ -22,14 +23,19 @@ function Tablle() {
             </TableRow>
           </TableHead>
           <TableBody>
-            <TableRow>
-              <TableCell component="th" scope="row">22/03/2022</TableCell>
-              <TableCell>08:30</TableCell>
-              <TableCell>Kayo Ennrique</TableCell>
-              <TableCell>Clinica Geral</TableCell>
-              <TableCell>Caroline Carvalho</TableCell>
-              <TableCell>Particular</TableCell>
-            </TableRow>
+            {consultas?.map((line) => {
+              return (
+                <TableRow>
+                  <TableCell component="th" scope="row">{line.data}</TableCell>
+                  <TableCell>{line.horario}</TableCell>
+                  <TableCell>{line.nome}</TableCell>
+                  <TableCell>{line.profissional[0].nome}</TableCell>
+                  <TableCell>{line.profissional[0].especialidade}</TableCell>
+                  <TableCell>{line.paciente}</TableCell>
+                  <TableCell>{line.modalidade}</TableCell>
+                </TableRow>
+              )
+            })}
           </TableBody>
         </Table>
       </TableContainer>
