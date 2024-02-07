@@ -5,7 +5,6 @@ import { YAxis } from "recharts/types/cartesian/YAxis";
 import { BarChart } from "recharts/types/chart/BarChart";
 
 function Graphic() {
-  const { dados, erro } = useQueryData();
   return (
     <ResponsiveContainer width="100%" height={350}>
       <BarChart layout="vertical"
