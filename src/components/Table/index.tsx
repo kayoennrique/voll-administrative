@@ -50,7 +50,6 @@ function Tablle({ consultas }: { consultas: IQuery[] | null }) {
                 <StylizedLine>
                   <StylizedCell component="th" scope="row">{new Date(line.data).toLocaleDateString()}</StylizedCell>
                   <StylizedCell>{line.horario}</StylizedCell>
-                  <StylizedCell>{line.nome}</StylizedCell>
                   <StylizedCell>{line.profissional[0].nome}</StylizedCell>
                   <StylizedCell>{line.profissional[0].especialidade}</StylizedCell>
                   <StylizedCell>{line.paciente}</StylizedCell>
