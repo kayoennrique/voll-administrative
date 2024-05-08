@@ -1,23 +1,21 @@
 :root {
-  --light-blue: #339CFF;
-  --dark-blue: #0B3B60;
-  --white: #FFFFFF;
-  --gray: #6B6E71;
-  --light-gray: #E7EBEF;
-  --main-font: 'Public Sans', sans-serif;
-  --secondary-font: 'Archivo', sans-serif;
+  --light-blue: #339cff;
+  --dark-blue: #0b3b60;
+  --white: #ffffff;
+  --gray: #6b6e71;
+  --light-gray: #e7ebef;
+  --main-font: "Public Sans", sans-serif;
+  --secondary-font: "Archivo", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: var(--main-font);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
 }
