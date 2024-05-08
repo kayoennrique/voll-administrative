@@ -9,26 +9,28 @@ import {
   ErrorMessage,
 } from "../../components";
 import { useForm, Controller } from "react-hook-form";
-import { useEffect } from "react";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-interface FormInputTypes {
-  name: string;
-  email: string;
-  telephone: string;
-  password: string;
-  passwordVerified: string;
-}
+const schemaRegistration = z.object({
+  name: z.string().min(5),
+  email: z.string(),
+  telephone: z.string(),
+  password: z.string(),
+  passwordVerified: z.string(),
+});
+
+type FormInputTypes = z.infer<typeof schemaRegistration>;
 
 const PersonalRegistration = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitSuccessful },
-    watch,
+    formState: { errors },    
     control,
-    reset,
   } = useForm<FormInputTypes>({
     mode: "all",
+    resolver: zodResolver(schemaRegistration),
     defaultValues: {
       name: "",
       email: "",
@@ -38,37 +40,14 @@ const PersonalRegistration = () => {
     },
   });
 
-  useEffect(() => {
-    reset();
-  }, [reset, isSubmitSuccessful]);
-
-  const aoSubmeter = (datas: FormInputTypes) => {
+  const onSubmit = (datas: FormInputTypes) => {
     console.log(datas);
   };
-
-  const password = watch("password");
-
-  const validPassword = {
-    mandatory: (val: string) =>
-      !!val || "Por favor, insira a senha novamente",
-    sizeMinimum: (val: string) =>
-      val.length >= 6 || "A senha deve ter pelo menos 6 caracteres",
-    equalPasswords: (val: string) => val === password || "As senhas não correspondem",
-  };
-
-  function validateEmail(value: string) {
-    const formatEmail = /^[^\s@]+@alura\.com\.br$/;
-    if (!formatEmail.test(value)) {
-      console.error("Endereço de email é inválido para este domínio");
-      return false;
-    }
-    return true;
-  }
 
   return (
     <>
       <Title>Insira alguns dados básicos:</Title>
-      <Form onSubmit={handleSubmit(aoSubmeter)}>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <Fieldset>
           <Label htmlFor="field-name">Nome</Label>
           <Input
@@ -76,13 +55,7 @@ const PersonalRegistration = () => {
             placeholder="Digite seu nome completo"
             type="text"
             $error={!!errors.name}
-            {...register("name", {
-              required: "Campo de nome é obrigatório",
-              minLength: {
-                value: 5,
-                message: "O nome deve ter pelo menos cinco caracteres",
-              },
-            })}
+            {...register("name",)}
           />
           {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
         </Fieldset>
@@ -93,10 +66,7 @@ const PersonalRegistration = () => {
             placeholder="Insira seu endereço de email"
             type="email"
             $error={!!errors.email}
-            {...register("email", {
-              required: "O campo de email é obrigatório",
-              validate: validateEmail,
-            })}
+            {...register("email",)}
           />
           {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
         </Fieldset>
@@ -133,14 +103,8 @@ const PersonalRegistration = () => {
             placeholder="Crie uma senha"
             type="password"
             $error={!!errors.password}
-            {...register("password", {
-              required: "O campo de senha é obrigatório",
-              minLength: {
-                value: 6,
-                message: "A senha deve ter pelo menos seis caracteres",
-              },
-            })}
-          />
+            {...register("password",)} 
+            />
           {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
         </Fieldset>
         <Fieldset>
@@ -150,10 +114,7 @@ const PersonalRegistration = () => {
             placeholder="Repita a senha anterior"
             type="password"
             $error={!!errors.passwordVerified}
-            {...register("passwordVerified", {
-              required: "Repita a senha",
-              validate: validPassword,
-            })}
+            {...register("passwordVerified", )}
           />
           {errors.passwordVerified && (
             <ErrorMessage>{errors.passwordVerified.message}</ErrorMessage>
