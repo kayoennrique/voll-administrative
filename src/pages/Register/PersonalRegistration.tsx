@@ -14,10 +14,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 const schemaRegistration = z.object({
   name: z.string().min(5, "O nome deve ter ao menos 5 caracteres"),
-  email: z.string().min(1, "O campo é obrigatorio").email("O email não é valido"),
-  telephone: z.string(),
+  email: z.string()
+  .min(1, "O campo é obrigatorio")
+  .email("O email não é valido")
+  .transform((val) => val.toLocaleLowerCase()),
+  telephone: z.string().min(1, "O telefone é obrigatório").regex(/^\(\d{2,3}\) \d{5}-\d{4}$/, "Formato de telefone inválido"),
   password: z.string().min(6, "A senha deve ter pelo menos 6 caracteres"),
   passwordVerified: z.string().min(1, "Esse campo não pode ser vazio"),
+}).refine((datas) => datas.password === datas.passwordVerified, {
+  message: "As senhas não coincidem",
+  path: ["passwordVerified"],
 });
 
 type FormInputTypes = z.infer<typeof schemaRegistration>;
