@@ -1,11 +1,11 @@
 import { Logo } from "../../components";
-import PersonalRegistration from "./PersonalRegistration";
+import RegistrationSpecialistTechnician from "./RegistrationSpecialistTechnician";
 
 export default function Register() {
   return (
     <>
       <Logo />
-      <PersonalRegistration />
+      <RegistrationSpecialistTechnician />
     </>
   );
 }
