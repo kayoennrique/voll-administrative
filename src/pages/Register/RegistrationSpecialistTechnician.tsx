@@ -19,7 +19,9 @@ const schemaRegistrationSpecialist = z.object({
   specialties: z.array(
     z.object({
       specialty: z.string().min(1, "Preencha a sua especialidade"),
-      yearConclusion: z.number().min(1, "Preencha a seu ano de conclusão"),
+      yearConclusion: z.coerce.number({
+        errorMap: () => ({ message: "Insira um número" }),
+      }).min(1, "Preencha a seu ano de conclusão"),
       institution: z.string().min(1, "Preencha a sua instituição de ensino"),
     })
   ),
@@ -117,10 +119,10 @@ const RegistrationSpecialistTechnician = () => {
                   {...register(`specialties.${index}.institution`)}
                 />
                 {errors.specialties?.[index]?.institution && (
-                <ErrorMessage>
-                  {errors.specialties?.[index]?.institution?.message}
-                </ErrorMessage>
-              )}
+                  <ErrorMessage>
+                    {errors.specialties?.[index]?.institution?.message}
+                  </ErrorMessage>
+                )}
               </Fieldset>
             </FormContainer>
             <Divisor />
