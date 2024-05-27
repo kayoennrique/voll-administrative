@@ -38,6 +38,14 @@ const RegistrationSpecialistTechnician = () => {
     name: "specialties",
   });
 
+  const addNewSpecialty = () => {
+    append({
+      specialty: '',
+      yearConclusion: 0,
+      institution: ''
+    })
+  }
+
   return (
     <>
       <Title className="title">Agora, seus dados técnicos:</Title>
@@ -88,7 +96,11 @@ const RegistrationSpecialistTechnician = () => {
           </div>
         ))}
         <ButtonContainer>
-          <Button type="button" $variant="secondary">
+          <Button
+            type="button"
+            onClick={addNewSpecialty}
+            $variant="secondary"
+            >
             Adicionar Especialidade
           </Button>
         </ButtonContainer>
